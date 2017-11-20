@@ -1,0 +1,10 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\LandingHelper",
+    "\\LandingHelper\\dataProviders",
+    "\\LandingHelper\\sounds"
+  ],
+  "SelectedNode": "\\LandingHelper\\landingDataProviderEmulator.py",
+  "PreviewInSolutionExplorer": false
+}

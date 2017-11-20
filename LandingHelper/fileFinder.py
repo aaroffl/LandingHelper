@@ -34,9 +34,5 @@ def findMatchingFilesWithoutExtension(pattern, path):
 		result.append(os.path.splitext(file)[0])
 	return result
 		
-		
-	
-
-
 if __name__ == "__main__":
 	main(sys.argv)

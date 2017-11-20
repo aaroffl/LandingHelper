@@ -1,0 +1,13 @@
+{
+  "dataProvider": {
+    "name": "MDLLaser",
+    "type": "MDLLaser"
+  },
+  "noiseReductionThresholds": {
+    "100": "5",
+    "50": ".5",
+    "10": ".5"
+  }
+
+
+}

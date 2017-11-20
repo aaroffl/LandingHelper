@@ -1,0 +1,66 @@
+<html>
+	<head>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+		<!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script type=text/javascript>
+			$(function() {
+			  $('a#process_input').bind('click', function() {
+				$.getJSON('/background_process', {
+				  proglang: $('input[name="proglang"]').val(),
+				}, function(data) {
+				  $("#result").text(data.result);
+				});
+				return false;
+			  });
+			});
+
+                        
+            var socket = io.connect('http://' + document.domain + ':' + location.port);
+            socket.on('connect', function () {
+                socket.emit('connected', { data: 'I\'m connected!' });
+            });
+            socket.on('message', function (data) {
+                $('h1').html(data)
+            });-->
+
+        <script type="text/javascript" src="//code.jquery.com/jquery-2.1.3.min.js"></script>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+        <script type="text/javascript" charset="utf-8">
+
+            $(document).ready(function () {
+
+                window.GO = function () {
+
+                    this.frequency = 500; // .5 seconds
+
+                    this.init = function () {
+                        window.setInterval(this.update_distance, 10);
+                    }
+
+                    this.update_distance = function () {
+                        $.get('/distance', function (response) {
+                            var d = response.distance;
+                            $('#log').text(d);
+                        }, 'json')
+                    }
+                }
+
+                go = new GO();
+                go.init();
+            });
+        </script>
+	</head>
+<body>
+    <h1>result?</h1>
+    <div class="container" id="content">
+        <div class="row">
+            <p>Asynchronous page updates will appear here:</p>
+            <h3>Number list:</h3>
+            <div id="log">
+                test
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
