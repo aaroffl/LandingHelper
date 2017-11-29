@@ -2,9 +2,8 @@
   "ExpandedNodes": [
     "",
     "\\LandingHelper",
-    "\\LandingHelper\\dataProviders",
-    "\\LandingHelper\\sounds"
+    "\\LandingHelperApp"
   ],
-  "SelectedNode": "\\LandingHelper\\landingDataProviderEmulator.py",
+  "SelectedNode": "\\LandingHelperApp\\views.py",
   "PreviewInSolutionExplorer": false
 }

@@ -1,5 +1,9 @@
 #!/usr/bin/env python
+import sys
+#sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 import time
+#import landingDataProvider
+
 import landingDataProvider
 import landingDataProviderEmulator
 import serial
@@ -16,11 +20,12 @@ import threading
 import queue
 import importlib #use this to import dataprovider classes that are specified in the config.
 logging.getLogger(__name__).addHandler(logging.NullHandler())
+dataProviderData = 0
 #use a threshold so we're not 
 #measurementValueThreshold = .5
-class coreApp(threading.Thread):
+class coreApp():
     def __init__(self):
-       threading.Thread.__init__(self)
+       #threading.Thread.__init__(self)
        self.errQ = queue.Queue()
        self.dataQ = queue.Queue()
        self.sleepDurSec = 5
@@ -62,13 +67,16 @@ class coreApp(threading.Thread):
         else: 
             print('invalid response: ', response)
     def run(self):
+        global dataProviderData
         dataIn = False
         while not self.stopRequest.isSet():
             if not self.isOpen():
                 self.connect()
             while self.keepAlive:
                 self.dat = self.dataProvider.read()
-                self.dataQ.put(dat)
+                #self.dataQ.put(dat)
+                print(self.dat)
+                dataProviderData = self.dat
                 if not self.inputStarted:
                     print('reading')
                 self.inputStarted = True
@@ -89,12 +97,12 @@ class coreApp(threading.Thread):
                 self.dataProvider.connect()
             except Exception:
                 print('error connecting')
-        self.dataProvider.connect()
+       # self.dataProvider.connect()
         while self.dataProvider.read() == '' and retryCount < self.retryMax and self.keepAlive:
             retryCount += 1
             print('retrying again soon, no data.')
             time.sleep(.5)
-        if retryCount >= retryMax:
+        if retryCount >= self.retryMax:
             print ('max retries met or exceded.')
             self.close()
             return False
@@ -105,6 +113,8 @@ class coreApp(threading.Thread):
 if __name__ == "__main__":
     soundlib = soundLibrary.load_sounds()
     app = coreApp()
-    app.start()
+    t = threading.Thread(target=app.run)
+    t.start()
+    t.join()
     print('program finishing, with no errors')
     sys.exit(0)

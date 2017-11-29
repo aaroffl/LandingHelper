@@ -1,17 +1,21 @@
 import landingDataProvider
+from threading import Thread
 import time
-from threading import Thread, Condition
-class LandingDataProviderEmulator(landingDataProvider.LandingDataProvider, Thread):
+last_received =1
+class LandingDataProviderEmulator(landingDataProvider.LandingDataProvider):
     def __init__(self,dataQ,errQ):
         super(LandingDataProviderEmulator,self).__init__(dataQ,errQ)
         self.readval = 0
         self.dataQ = dataQ
         self.errQ = errQ
-        self.condition = Condition()
+
+        Thread(target=self.receiving).start()
+        #self.receiving()
+       # self.condition = Condition()
     def connect(self):
         num = range(5)
         while True:
-            self.condition.acquire()
+           # self.condition.acquire()
             if len(self.dataQ) == 10:
                 print ("queue full")
         return "connected"
@@ -23,14 +27,28 @@ class LandingDataProviderEmulator(landingDataProvider.LandingDataProvider, Threa
 		#log data
         return True
     def read(self):
+        #while True:
+        #    self.readval +=1
+        #    time.sleep(0.01)
+        #    if self.readval is 10:
+        #        self.readval = 0
+        return last_received
+    def receiving(self):
+        global last_received
+        buffer = 1
         while True:
-            self.readval +=1
-            time.sleep(0.01)
-            if self.readval is 10:
-                self.readval = 0
+            # last_received = ser.readline()
+            buffer += 1
+            last_received = last_received +1
+            if buffer is 10:
+                last_received=1
+                buffer = 1
+        return
+    def run(self):
+        self.read()
         return
     def isOpen(self):
-        return True
+        return False
     def increment(self,i):
         i += 1
         return i
