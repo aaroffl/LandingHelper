@@ -2,8 +2,10 @@
   "ExpandedNodes": [
     "",
     "\\LandingHelper",
-    "\\LandingHelperApp"
+    "\\LandingHelper\\LandingHelperApp",
+    "\\LandingHelper\\LandingHelperApp\\static",
+    "\\LandingHelper\\sounds"
   ],
-  "SelectedNode": "\\LandingHelperApp\\views.py",
+  "SelectedNode": "\\LandingHelper\\LandingHelperApp\\views.py",
   "PreviewInSolutionExplorer": false
 }

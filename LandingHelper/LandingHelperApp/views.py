@@ -1,10 +1,9 @@
-#!/usr/bin/env python
 import sys
 sys.path.append('C:\\Users\\Aaron\\Source\\Repos\\LandingHelper')
-sys.path.append('C:\\Users\\Aaron\\Source\\Repos\\LandingHelper\LandingHelper')
-from flask import Flask, render_template, session,request
-#from LandingHelper import *
+sys.path.append('C:\\Users\\Aaron\\Source\\Repos\\LandingHelper\\LandingHelper')
+import LandingHelper
 from LandingHelper import core
+from flask import Flask, render_template, session,request
 from flask_socketio import SocketIO, emit, join_room, leave_room, \
     close_room, rooms, disconnect
 import threading
@@ -20,15 +19,9 @@ app.config['SECRET_KEY'] = 'test'
 socketio = SocketIO(app, async_mode=async_mode)
 thread = None
 thread_lock = Lock()
-
 @app.route('/')
 def mainpage():
-    #app = core.coreApp()
-    #t = threading.Thread(target=app.run)
-    #t.start()
 
-
-    #t.join()
     return render_template('main.html', async_mode=socketio.async_mode)
 
 #@app.route('/distance')
@@ -39,10 +32,14 @@ def mainpage():
     
 #@socketio.on('my event')
 def distance():
+    coreapp = LandingHelper.core.coreApp()
+    t = threading.Thread(target=coreapp.run)
+    t.start()
+    
     while True:
-        socketio.sleep(.5)
-        distance = str(random.randint(1,100))
-        socketio.emit('my_response', {'data':distance})
+        socketio.sleep(.01)
+        distance = str(random.randint(1,100))+'ft'
+        socketio.emit('my_response', {'data':LandingHelper.core.dataProviderData})
 
 @socketio.on('connect')
 def test_connect():

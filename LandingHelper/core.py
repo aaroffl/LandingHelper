@@ -21,11 +21,15 @@ import queue
 import importlib #use this to import dataprovider classes that are specified in the config.
 logging.getLogger(__name__).addHandler(logging.NullHandler())
 dataProviderData = 0
+previousReading = None
+soundlib = None
 #use a threshold so we're not 
 #measurementValueThreshold = .5
 class coreApp():
     def __init__(self):
        #threading.Thread.__init__(self)
+       global soundlib
+       soundlib = soundLibrary.load_sounds()
        self.errQ = queue.Queue()
        self.dataQ = queue.Queue()
        self.sleepDurSec = 5
@@ -35,25 +39,25 @@ class coreApp():
        self.inputStarted = False
        self.retryMax = 10
        self.dataProvider = landingDataProviderEmulator.LandingDataProviderEmulator(self.dataQ,self.errQ)
-    def parse_response(input_):
+
+    def parse_response(self,input_):
+        global soundlib
         global previousReading
         response = str(input_)
         if response.endswith('ft'):
-            #print('measurement: ', response)
+            
             response = response[:-2]
             if response == '':
                 measValue=0
             else:
                 measValue = int(float(response))
-            if measValue == previousReading:
-                return
-            else:
-                previousReading = measValue
-            #print ('meas value',measValue)
-            #print(soundlib.get(str(measValue)))
+            #if measValue == previousReading:
+            #    return
+            #else:
+            #    previousReading = measValue
             altitudeSound = soundlib.get(str(measValue))
             if altitudeSound == None:
-            
+                print("sound not found, meas value:",measValue)
                 return
             pygame.mixer.fadeout(1000)
             start = time.time()
@@ -61,7 +65,7 @@ class coreApp():
             while True:
                 #time.sleep(.1)
                 if pygame.mixer.get_busy() == False:
-                    #print("sound finished")
+                    print("sound finished")
                     break
             end = time.time()   
         else: 
@@ -73,9 +77,12 @@ class coreApp():
             if not self.isOpen():
                 self.connect()
             while self.keepAlive:
+                
                 self.dat = self.dataProvider.read()
                 #self.dataQ.put(dat)
+                #time.sleep(1)
                 print(self.dat)
+                self.parse_response(str(dataProviderData)+'ft')
                 dataProviderData = self.dat
                 if not self.inputStarted:
                     print('reading')

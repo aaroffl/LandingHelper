@@ -5,6 +5,11 @@
       "taskName": "task-requirements",
       "appliesTo": "requirements.txt",
       "type": "launch"
+    },
+    {
+      "taskName": "task-findSound",
+      "appliesTo": "LandingHelper/findSound.py",
+      "type": "launch"
     }
   ]
 }

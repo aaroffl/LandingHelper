@@ -1,7 +1,7 @@
 import landingDataProvider
 from threading import Thread
 import time
-last_received =1
+last_received =0
 class LandingDataProviderEmulator(landingDataProvider.LandingDataProvider):
     def __init__(self,dataQ,errQ):
         super(LandingDataProviderEmulator,self).__init__(dataQ,errQ)
@@ -40,6 +40,8 @@ class LandingDataProviderEmulator(landingDataProvider.LandingDataProvider):
             # last_received = ser.readline()
             buffer += 1
             last_received = last_received +1
+            time.sleep(.5)
+            print('!!!!!!!!!!!!!!!!!!!!!!!!!'+str(last_received))
             if buffer is 10:
                 last_received=1
                 buffer = 1

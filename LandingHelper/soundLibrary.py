@@ -3,7 +3,7 @@ import fileFinder
 import pygame
 
 sound_library = {}
-wavFiles = fileFinder.findMatchingFiles('*.wav','./sounds/',True)
+wavFiles = fileFinder.findMatchingFiles('*.wav','../sounds/',True)
 def load_sounds():
     pygame.mixer.init()
     global sound_library
