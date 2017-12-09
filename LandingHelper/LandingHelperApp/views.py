@@ -4,6 +4,7 @@ sys.path.append('C:\\Users\\Aaron\\Source\\Repos\\LandingHelper\\LandingHelper')
 import LandingHelper
 from LandingHelper import core
 from flask import Flask, render_template, session,request
+from flask_sqlalchemy import SQLAlchemy
 from flask_socketio import SocketIO, emit, join_room, leave_room, \
     close_room, rooms, disconnect
 import threading
@@ -12,16 +13,18 @@ from math import sqrt
 import json
 import random
 import time
-async_mode = None
-
+async_mode = 'threading'
 app = Flask(__name__)
+app.config.fromobj
 app.config['SECRET_KEY'] = 'test'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
+db = SQLAlchemy(app)
 socketio = SocketIO(app, async_mode=async_mode)
 thread = None
 thread_lock = Lock()
 @app.route('/')
 def mainpage():
-
+    
     return render_template('main.html', async_mode=socketio.async_mode)
 
 #@app.route('/distance')
@@ -52,3 +55,4 @@ def test_connect():
 if __name__ == '__main__':
     socketio.run(app, debug = True)
 
+class Sounds

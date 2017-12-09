@@ -1,12 +1,154 @@
 {
-  "dataProvider": {
-    "name": "MDLLaser",
-    "type": "MDLLaser"
+  "general": {
+
   },
-  "noiseReductionThresholds": {
+  "data_providers": {
+    "sleep_duration":  5,
+    "log_database": [
+      {
+
+        "active": "true",
+        "path": "/.../db/logdatabase",
+        "username": "admin",
+        "password": "password",
+        "filter": "<500"
+
+      }
+
+    ]
+  },
+  "noise_reduction_threasholds": {
     "100": "5",
     "50": ".5",
     "10": ".5"
+  },
+  "sounds": {
+    "volume": "100",
+    "path": "./sounds/",
+    "checkgear": "10",
+    "sound": [
+      {
+        "id": "400",
+        "active": true,
+        "checkgear": "true",
+        "file": "400.wav"
+      },
+      {
+        "id": "300",
+        "active": true,
+        "checkgear": "true",
+        "file": "300.wav"
+      },
+      {
+        "id": "200",
+        "active": true,
+        "checkgear": "true",
+        "file": "200.wav"
+      },
+      {
+        "id": "100",
+        "active": true,
+        "checkgear": "true",
+        "file": "100.wav"
+      },
+      {
+        "id": "50",
+        "active": true,
+        "checkgear": "true",
+        "file": "50.wav"
+      },
+      {
+        "id": "40",
+        "active": true,
+        "checkgear": "true",
+        "file": "40.wav"
+      },
+      {
+        "id": "10",
+        "active": true,
+        "checkgear": "true",
+        "file": "10.wav"
+      },
+      {
+        "id": "9",
+        "active": true,
+        "checkgear": "true",
+        "file": "9.wav"
+      },
+      {
+        "id": "8",
+        "active": true,
+        "checkgear": "true",
+        "file": "8.wav"
+      },
+      {
+        "id": "7",
+        "active": true,
+        "checkgear": "true",
+        "file": "7.wav"
+      },
+
+      {
+        "id": "6",
+        "active": true,
+        "checkgear": "true",
+        "file": "6.wav"
+      },
+      {
+        "id": "5",
+        "active": true,
+        "checkgear": "true",
+        "file": "5.wav"
+      },
+      {
+        "id": "4",
+        "active": false,
+        "checkgear": "true",
+        "file": "4.wav"
+      },
+      {
+        "id": "3",
+        "active": true,
+        "checkgear": "true",
+        "file": "3.wav"
+      },
+      {
+        "id": "2",
+        "active": true,
+        "checkgear": "true",
+        "file": "2.wav"
+      },
+      {
+        "id": "1",
+        "active": true,
+        "checkgear": "true",
+        "file": "1.wav"
+      },
+      {
+        "id": "0",
+        "active": false,
+        "checkgear": "true",
+        "file": "checkgear.wav"
+      }
+    ]
+  },
+  "mdllaser": {
+    "serialport": "/dev/ttyAMA0",
+    "baudrate": "38400",
+    "parity": "PARITY_NONE",
+    "stopbits": "STOPBITS_NONE",
+    "bytesize": "EIGHTBITS",
+    "timeout": "1",
+    "readDelay": "0"
+  },
+  "x11": {
+    "serialport": "/dev/ttyAMA0",
+    "baudrate": "38400",
+    "parity": "PARITY_NONE",
+    "stopbits": "STOPBITS_NONE",
+    "bytesize": "EIGHTBITS",
+    "timeout": "1",
+    "readDelay": "0"
   }
 
 

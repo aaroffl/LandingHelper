@@ -8,17 +8,14 @@ class LandingDataProviderEmulator(landingDataProvider.LandingDataProvider):
         self.readval = 0
         self.dataQ = dataQ
         self.errQ = errQ
-
+        self.connected = False;
         Thread(target=self.receiving).start()
         #self.receiving()
        # self.condition = Condition()
     def connect(self):
-        num = range(5)
-        while True:
-           # self.condition.acquire()
-            if len(self.dataQ) == 10:
-                print ("queue full")
-        return "connected"
+        time.sleep(2)
+        connected = True
+        return
     def disconnect(self):
         return "disconnected"
     def reset(self):
