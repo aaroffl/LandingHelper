@@ -24,6 +24,7 @@ class LandingDataProviderEmulator(landingDataProvider.LandingDataProvider):
 		#log data
         return True
     def read(self):
+        global last_received
         #while True:
         #    self.readval +=1
         #    time.sleep(0.01)

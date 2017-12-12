@@ -1,8 +1,7 @@
 import sys
 sys.path.append('C:\\Users\\Aaron\\Source\\Repos\\LandingHelper')
 sys.path.append('C:\\Users\\Aaron\\Source\\Repos\\LandingHelper\\LandingHelper')
-import LandingHelper
-from LandingHelper import core
+import core
 from flask import Flask, render_template, session,request
 from flask_sqlalchemy import SQLAlchemy
 from flask_socketio import SocketIO, emit, join_room, leave_room, \
@@ -15,10 +14,9 @@ import random
 import time
 async_mode = 'threading'
 app = Flask(__name__)
-app.config.fromobj
 app.config['SECRET_KEY'] = 'test'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
-db = SQLAlchemy(app)
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
+#db = SQLAlchemy(app)
 socketio = SocketIO(app, async_mode=async_mode)
 thread = None
 thread_lock = Lock()
@@ -35,14 +33,14 @@ def mainpage():
     
 #@socketio.on('my event')
 def distance():
-    coreapp = LandingHelper.core.coreApp()
+    config = 'C:/Users/Aaron/Source/Repos/LandingHelper/LandingHelper/config.json'
+    coreapp = core.coreApp(config)
     t = threading.Thread(target=coreapp.run)
     t.start()
-    
     while True:
         socketio.sleep(.01)
-        distance = str(random.randint(1,100))+'ft'
-        socketio.emit('my_response', {'data':LandingHelper.core.dataProviderData})
+        #distance = str(random.randint(1,100))+'ft'
+        socketio.emit('my_response', {'data': core.dataProviderData})
 
 @socketio.on('connect')
 def test_connect():
@@ -54,5 +52,3 @@ def test_connect():
     emit('my_response', {'data': 'Connected', 'count': 1})
 if __name__ == '__main__':
     socketio.run(app, debug = True)
-
-class Sounds

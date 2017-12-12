@@ -4,10 +4,10 @@
   },
   "data_providers": {
     "sleep_duration":  5,
-    "log_database": [
+    "flightLog_database": [
       {
 
-        "active": "true",
+        "active": true,
         "path": "/.../db/logdatabase",
         "username": "admin",
         "password": "password",
@@ -24,111 +24,111 @@
   },
   "sounds": {
     "volume": "100",
-    "path": "./sounds/",
-    "checkgear": "10",
+    "path": "C:/Users/Aaron/Source/Repos/LandingHelper/LandingHelper/sounds",
+    "check_gear": "6",
+    "check_gear_sound_id": "checkGearDown",
     "sound": [
       {
         "id": "400",
         "active": true,
-        "checkgear": "true",
+        "checkgear": true,
         "file": "400.wav"
       },
       {
         "id": "300",
         "active": true,
-        "checkgear": "true",
+        "checkgear": true,
         "file": "300.wav"
       },
       {
         "id": "200",
         "active": true,
-        "checkgear": "true",
+        "checkgear": true,
         "file": "200.wav"
       },
       {
         "id": "100",
         "active": true,
-        "checkgear": "true",
+        "checkgear": true,
         "file": "100.wav"
       },
       {
         "id": "50",
         "active": true,
-        "checkgear": "true",
+        "checkgear": true,
         "file": "50.wav"
       },
       {
         "id": "40",
         "active": true,
-        "checkgear": "true",
+        "checkgear": true,
         "file": "40.wav"
       },
       {
         "id": "10",
         "active": true,
-        "checkgear": "true",
+        "checkgear": true,
         "file": "10.wav"
       },
       {
         "id": "9",
         "active": true,
-        "checkgear": "true",
+        "checkgear": true,
         "file": "9.wav"
       },
       {
         "id": "8",
         "active": true,
-        "checkgear": "true",
+        "checkgear": true,
         "file": "8.wav"
       },
       {
         "id": "7",
         "active": true,
-        "checkgear": "true",
+        "checkgear": true,
         "file": "7.wav"
       },
-
       {
         "id": "6",
         "active": true,
-        "checkgear": "true",
+        "checkgear": true,
         "file": "6.wav"
       },
       {
         "id": "5",
         "active": true,
-        "checkgear": "true",
+        "checkgear": true,
         "file": "5.wav"
       },
       {
         "id": "4",
-        "active": false,
-        "checkgear": "true",
+        "active": true,
+        "checkgear": true,
         "file": "4.wav"
       },
       {
         "id": "3",
         "active": true,
-        "checkgear": "true",
+        "checkgear": true,
         "file": "3.wav"
       },
       {
         "id": "2",
         "active": true,
-        "checkgear": "true",
+        "checkgear": true,
         "file": "2.wav"
       },
       {
         "id": "1",
         "active": true,
-        "checkgear": "true",
+        "checkgear": true,
         "file": "1.wav"
       },
       {
-        "id": "0",
-        "active": false,
-        "checkgear": "true",
-        "file": "checkgear.wav"
+        "id": "checkGearDown",
+        "active": true,
+        "checkgear": true,
+        "file": "checkGearDown.wav"
       }
     ]
   },
