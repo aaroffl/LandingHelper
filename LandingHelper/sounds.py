@@ -38,7 +38,7 @@ class Voice():
                     sounddao.soundobject = pygame.mixer.Sound(soundfile)
                     self.sound_library[sounddao.id] = sounddao
                 else:
-                    print('file does not exist')
+                    print('file does not exist',soundfilePath)
             else:
                 print('sound file not active',soundcfg['file'])
         return

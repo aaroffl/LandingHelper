@@ -2,8 +2,13 @@
   "ExpandedNodes": [
     "",
     "\\LandingHelper",
-    "\\LandingHelper\\LandingHelperApp"
+    "\\LandingHelper\\LandingHelperApp",
+    "\\LandingHelper\\LandingHelperApp\\static\\css",
+    "\\LandingHelper\\LandingHelperApp\\static\\fonts",
+    "\\LandingHelper\\LandingHelperApp\\static\\js",
+    "\\LandingHelper\\LandingHelperApp\\templates",
+    "\\LandingHelper\\sounds"
   ],
-  "SelectedNode": "\\LandingHelper\\core.py",
+  "SelectedNode": "\\LandingHelper\\sounds.py",
   "PreviewInSolutionExplorer": false
 }
