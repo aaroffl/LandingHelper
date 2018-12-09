@@ -6,19 +6,17 @@ import time
 
 import landingDataProvider
 import landingDataProviderEmulator
-import serial
 import sys
 import io
-import pygame
-import fileFinder
 import os
 import subprocess
-import soundLibrary
 import sounds
 import logging
 import json
 import threading
 import queue
+import MDLLaser
+import X11Laser
 import importlib #use this to import dataprovider classes that are specified in the config.
 logging.getLogger(__name__).addHandler(logging.NullHandler())
 dataProviderData = 0
@@ -40,7 +38,8 @@ class coreApp():
         self.inputStarted = False
         self.retryMax = 10
         self.dataProvider = landingDataProviderEmulator.LandingDataProviderEmulator(self.dataQ,self.errQ)
-
+        #self.dataProvider = MDLLaser.MDLLaser(self.dataQ,self.errQ)
+        #self.dataProvider = X11Laser.X11Laser(self.dataQ,self.errQ) 
     def playSound(self,input_):
         global previousReading
         input = str(input_)
@@ -50,7 +49,6 @@ class coreApp():
         else:
             previousReading = measValue
             self.voice.altitude(measValue)
-        
 
     def run(self):
         global dataProviderData

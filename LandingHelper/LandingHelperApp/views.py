@@ -18,6 +18,7 @@ app.config['SECRET_KEY'] = 'test'
 #app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
 #db = SQLAlchemy(app)
 socketio = SocketIO(app, async_mode=async_mode)
+connected = False
 thread = None
 thread_lock = Lock()
 @app.route('/')
@@ -41,7 +42,6 @@ def distance():
         socketio.sleep(.01)
         #distance = str(random.randint(1,100))+'ft'
         socketio.emit('my_response', {'data': core.dataProviderData})
-
 @socketio.on('connect')
 def test_connect():
     global thread
