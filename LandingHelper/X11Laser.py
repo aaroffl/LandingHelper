@@ -6,82 +6,93 @@ import queue
 import os
 import io
 import sys
+import re
 last_received =0
 class X11Laser(landingDataProvider.LandingDataProvider):
     readval = None
     ser = None
+    regex = None
     def __init__(self,dataQ,errQ):
         super(X11Laser,self).__init__(dataQ,errQ)
         self.readval = 0
         self.dataQ = dataQ
         self.errQ = errQ
         self.connected = False;
+        self.ser = serial.Serial('/dev/ttyUSB0',115200)
+        self.ser.parity = serial.PARITY_NONE
+        self.ser.stopbits = serial.STOPBITS_ONE
+        self.ser.bytesize = serial.EIGHTBITS
+        self.ser.timeout = 1
+        self.ser.dsrdtr = False
+        self.regex = re.compile(r'[0-9]{1,3}[.][0-9]{1,3}[\s]{1}[m]{1}')
         Thread(target=self.receiving).start()
-        #self.receiving()
-       # self.condition = Condition()
     def connect(self):
-       global readval
-       ser = None
-       try:
-           ser = serial.Serial()
-           ser.port = 'COM3'
-           ser.baudrate = 11500
-           ser.parity = serial.PARITY_NONE
-           ser.stopbits = serial.STOPBITS_ONE
-           ser.bytesize = serial.EIGHTBITS
-           ser.timeout = 1
-           ser.dsrdtr = False
-           ser.open()
-           ser.isOpen()
-       except Exception as ex:
+        #global last_received
+        print('X11: connecting')
+        try:
+           #self.ser.Open()
+           self.connected = self.ser.isOpen()
+           print('X11: connected',self.connected)
+        except Exception as ex:
            print('Error has Occured opening port. exiting program..', ex.args)
            sys.exit(1)
-           ser.flushInput()  # flush input buffer
+          
+           self.ser.flushInput()  # flush input buffer
            print('input buffer flushed.')
-       while 1:
-         try:
-             #ser.write('Write counter: %d \n' %(counter))
-             #time.sleep(.05) # sleep waiting for response
-             #resp2 = ser.read('\r')
-             readval = _readline(ser)
-             #print('resp2=',resp2)
-             #parse_response(resp2)
-             ser.flushInput()
-         except Exception as a:
-             print('shutting down port. ',a)
-             ser.close()
-             break
+        # while True:
+           # last_received = self.ser.readline()
+           # print(last_received)
+           # s = self.ser.readline().split(b" ")
+           # #print (str(s))
+           # a = (s[3:4])
+           # meas = float(a[0].decode('utf-8')) * 3.28084
+           # #print(meas)
+           # last_received = meas
+        #self.receiving()
     def disconnect(self):
         return "disconnected"
     def reset(self):
         return "reset"
     def send(self, data):
-		#log data
+        #log data
         return True
     def read(self):
         global last_received
         return last_received
     def receiving(self):
         global last_received
-        buffer = 1
         while True:
-            last_received = ser.readline()
-            buffer += 1
-            last_received = last_received +1
-            time.sleep(.5)
-            print('!!!!!!!!!!!!!!!!!!!!!!!!!'+str(last_received))
+            measInMeter = re.search(r'[0-9]{1,3}[.][0-9]{1,3}[\s]{1}[m]{1}',self.ser.readline().decode('utf-8'))
+            meas = 0.0
+            if a != None:
+                meas = measInMeter.group(0).replace('m','')
+            measRounded = (float(meas) * 3.28084)
+            #print(c)
+            last_received = int(measRounded)
+            #s = self.ser.readline().split(b" ")
+           # print(self.ser.readline().decode('utf-8'))
+            #print(self.regex.match(self.ser.readline().decode('utf-8')))
+            #print(s)
+            self.ser.flushInput()
+            # if len(s) > 4:
+              # a = (s[3:4])
+              # meas = float(a[0].decode('utf-8')) * 3.28084
+              # #print(meas)
+              # time.sleep(.5)
+              # last_received = int(meas)
+              #print(last_received)
         return
     def run(self):
         self.read()
         return
     def isOpen(self):
-        return False
+        return self.ser.isOpen()
     def increment(self,i):
         i += 1
         return i
     #def __init__(self):
     #    return
-    def _readline(ser):
+    def _readline(self,ser):
         eol = b'\r'
         leneol = len(eol)
         line = bytearray()
@@ -102,4 +113,5 @@ if __name__ == "__main__":
     dataQ = queue.Queue()
     laser = X11Laser(dataQ,errQ)
     laser.connect()
+    laser.receiving()
     sys.exit(0)

@@ -38,7 +38,7 @@ class LandingDataProviderEmulator(landingDataProvider.LandingDataProvider):
             # last_received = ser.readline()
             buffer += 1
             last_received = last_received +1
-            time.sleep(.5)
+            time.sleep(1)
             print('!!!!!!!!!!!!!!!!!!!!!!!!!'+str(last_received))
             if buffer is 10:
                 last_received=1

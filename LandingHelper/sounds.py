@@ -82,11 +82,12 @@ class Voice():
                 print("sound finished")
                 break
                 end = time.time()   
-            else: 
-                print('invalid response: ', measurement)
+            #else: 
+                #
+               # print('cannot play sound for %s, player is busy', measurement)
         return
 if __name__ == "__main__":
-    config = 'C:/Users/Aaron/Source/Repos/LandingHelper/LandingHelper/config.json'
+    config = 'config.json'
     sound = Voice(config) 
 
 

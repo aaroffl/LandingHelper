@@ -1,22 +1,36 @@
 {
-  "general": {
+  "sleep_duration": 5,
+  "dataProviderModule": "landingDataProviderEmulator",
+  "dataProviderClass": "LandingDataProviderEmulator",
+  "flightLog_database": [
+    {
 
-  },
-  "data_providers": {
-    "sleep_duration":  5,
-    "flightLog_database": [
-      {
+      "active": true,
+      "path": "/.../db/logdatabase",
+      "username": "admin",
+      "password": "password",
+      "filter": "<500"
 
-        "active": true,
-        "path": "/.../db/logdatabase",
-        "username": "admin",
-        "password": "password",
-        "filter": "<500"
+    }
 
-      }
-
-    ]
-  },
+  ],
+  "data_providers": [
+    {
+      "name": "X11Laser",
+      "module": "X11Laser",
+      "class": "X11Laser"
+    },
+    {
+      "name": "MDLLaser",
+      "module": "MDLLaser",
+      "class": "MDLLaser"
+    },
+    {
+      "name": "landingDataProviderEmulator",
+      "module": "landingDataProviderEmulator",
+      "class": "landingDataProviderEmulator"
+    }
+  ],
   "noise_reduction_threasholds": {
     "100": "5",
     "50": ".5",
@@ -24,7 +38,7 @@
   },
   "sounds": {
     "volume": "100",
-    "path": "C:/Users/Aaron/Source/Repos/LandingHelper/LandingHelper/sounds",
+    "path": "sounds",
     "check_gear": "6",
     "check_gear_sound_id": "checkGearDown",
     "sound": [
@@ -63,6 +77,12 @@
         "active": true,
         "checkgear": true,
         "file": "40.wav"
+      },
+      {
+        "id": "20",
+        "active": true,
+        "checkgear": true,
+        "file": "20.wav"
       },
       {
         "id": "10",
